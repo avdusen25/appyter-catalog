@@ -2,9 +2,7 @@ This appyter is the second part of the two-part ENKEFALOS analysis pipeline. Thi
 
 # Framework
 
-<p align="center">
-  <img width="615" alt="image" src="https://github.com/KrishU27/Enkefalos/assets/132734331/c378127d-4168-43cd-8907-46f2e0a65e3f">
-</p>
+![image](https://github.com/KrishU27/Enkefalos/assets/132734331/c378127d-4168-43cd-8907-46f2e0a65e3f)
 
 There are several sections in this appyter, for which we have a brief overview below. If you would like a more comprehensive guide to how to use ENKEFALOS, please refer to our user guide [here](https://docs.google.com/document/d/15h8A65FygTK2_KLA_-6R8u8clJSRnF7yHLFAvN7BN6Y/edit?tab=t.0#heading=h.ola4n01ccsle).
   
