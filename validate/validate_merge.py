@@ -258,7 +258,8 @@ def validate_appyter(appyter, library_version=appyter_library_version, logger=lo
     logger.warning(f"Stopping early as a download requires manual intervention.")
     return
   logger.info(f"Fixing permissions...")
-  assert Popen(['chmod', '-R', '777', tmp_directory]).wait() == 0, f"ERROR: Changing permissions failed"
+  if Popen(['chmod', '-R', '777', tmp_directory]).wait() != 0:
+    logger.warning(f"WARN: Changing permissions failed")
   logger.info(f"Constructing default notebook from appyter...")
   with Popen([
     'docker', 'run',
