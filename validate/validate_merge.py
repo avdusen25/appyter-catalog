@@ -180,7 +180,6 @@ def validate_appyter(appyter, library_version=appyter_library_version, logger=lo
     logger.error(f"{nbfile} is not valid json")
     raise e
   #
-  assert not os.path.isfile(os.path.join('appyters', appyter, 'Dockerfile')), 'Custom Dockerfiles are no longer supported'
   logger.info("Creating Dockerfile...")
   import sys; sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
   from compose.build_dockerfile import prepare_appyter
