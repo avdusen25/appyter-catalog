@@ -263,6 +263,7 @@ def validate_appyter(appyter, library_version=appyter_library_version, logger=lo
   with Popen([
     'docker', 'run',
     '-v', f"{tmp_directory}:/data",
+    '-e', 'APPYTER_PREFIX=/app/',
     "-i", appyter_tag,
     'appyter', 'nbconstruct',
     f"--output=/data/{nbfile}",
