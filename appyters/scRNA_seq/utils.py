@@ -501,19 +501,24 @@ def get_enrichr_results(user_list_id, gene_set_libraries, overlappingGenes=True,
     return concatenatedDataframe
 
 def get_libraries():
-    res = requests.get("https://maayanlab.cloud/speedrichr/api/datasetStatistics")
-    if not res.ok:
-        print(res.text)
-        return {
+    libs = {
                 'GO_Biological_Process': 'GO_Biological_Process_2025',
                 'MGI_Mammalian_Phenotype_Level_4': 'MGI_Mammalian_Phenotype_Level_4_2024',
                 'KEGG': 'KEGG_2021_Human',
                 'HuBMAP_ASCTplusB_augmented': 'HuBMAP_ASCTplusB_augmented_2022',
                 'GWAS_Catalog': 'GWAS_Catalog_2023',
+                'ChEA': 'ChEA_2016',
+                'KEA': 'KEA_2015',
+                'ARCHS4_Kinases_Coexp': 'ARCHS4_Kinases_Coexp',
+                'TargetScan_microRNA': 'TargetScan_microRNA_2017',
+                'miRTarBase': 'miRTarBase_2017',
                 }
+    res = requests.get("https://maayanlab.cloud/speedrichr/api/datasetStatistics")
+    if not res.ok:
+        print(res.text)
+        return libs
     
     else:
-        libs = {"GO_Biological_Process": "", "MGI_Mammalian_Phenotype_Level_4": "", "KEGG": "", "HuBMAP_ASCTplusB_augmented": "", 'GWAS_Catalog': ""}
         for i in res.json()['statistics']:
             lib = i['libraryName']
             if "Mouse" not in lib:
@@ -567,23 +572,23 @@ def get_enrichr_results_by_library(enrichr_results, signature_label, plot_type='
 
 
 def get_enrichr_result_tables_by_library(enrichr_results, signature_label, library_type='tf'):
-
+    libs = get_libraries()
     # Libraries
     if library_type == 'tf':
         # Libraries
         libraries = {
-            'ChEA_2016': 'ChEA (experimentally validated targets)',
+            libs['ChEA']: 'ChEA (experimentally validated targets)',
         }
     elif library_type == "ke":
         # Libraries
         libraries = {
-            'KEA_2015': 'KEA (experimentally validated targets)',
-            'ARCHS4_Kinases_Coexp': 'ARCHS4 (coexpressed genes)'
+            libs['KEA']: 'KEA (experimentally validated targets)',
+            libs['ARCHS4_Kinases_Coexp']: 'ARCHS4 (coexpressed genes)'
         }
     elif library_type == "mirna":
         libraries = {
-        'TargetScan_microRNA_2017': 'TargetScan (experimentally validated targets)',
-        'miRTarBase_2017': 'miRTarBase (experimentally validated targets)'
+        libs['TargetScan_microRNA']: 'TargetScan (experimentally validated targets)',
+        libs['miRTarBase']: 'miRTarBase (experimentally validated targets)'
         }
 
 
