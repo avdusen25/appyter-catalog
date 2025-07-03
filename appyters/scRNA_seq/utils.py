@@ -81,9 +81,10 @@ def check_df(df, col):
 def load_seurat_files(mtx_filename, gene_filename, barcodes_filename):
     
     adata = anndata.read_mtx(mtx_filename).T
-    with open(barcodes_filename, "r") as f:
-        cells = f.readlines()
-        cells = [x.strip() for x in cells]
+    # with open(barcodes_filename, "r") as f:
+    #     cells = f.readlines()
+    #     cells = [x.strip() for x in cells]
+    cells = pd.read_csv(barcodes_filename, header=None)[0].tolist()
     genes = pd.read_csv(
         gene_filename,
         header=None,
