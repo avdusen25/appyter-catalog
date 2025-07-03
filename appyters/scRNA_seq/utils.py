@@ -451,8 +451,8 @@ def submit_enrichr_geneset(geneset, label):
     }
     response = requests.post(ENRICHR_URL, files=payload)
     if not response.ok:
-        raise Exception('Error analyzing gene list')
-    time.sleep(0.5)
+        raise Exception('Error analyzing gene list', response.text)
+    time.sleep(1)
     data = json.loads(response.text)
     return data
 
@@ -484,8 +484,8 @@ def get_enrichr_results(user_list_id, gene_set_libraries, overlappingGenes=True,
                        query_string % (user_list_id, gene_set_library)
                 )
         if not response.ok:
-            raise Exception('Error fetching enrichment results')
-
+            raise Exception('Error fetching enrichment results', response.text)
+        time.sleep(1)
         data = json.loads(response.text)
         resultDataframe = pd.DataFrame(data[gene_set_library], columns=[
                                        'rank', 'term_name', 'pvalue', 'zscore', 'combined_score', 'overlapping_genes', 'FDR', 'old_pvalue', 'old_FDR'])
