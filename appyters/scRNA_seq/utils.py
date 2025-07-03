@@ -500,30 +500,61 @@ def get_enrichr_results(user_list_id, gene_set_libraries, overlappingGenes=True,
         concatenatedDataframe['geneset'] = geneset
     return concatenatedDataframe
 
+def get_libraries():
+    res = requests.get("https://maayanlab.cloud/speedrichr/api/datasetStatistics")
+    if not res.ok:
+        print(res.text)
+        return {
+                'GO_Biological_Process': 'GO_Biological_Process_2025',
+                'MGI_Mammalian_Phenotype_Level_4': 'MGI_Mammalian_Phenotype_Level_4_2024',
+                'KEGG': 'KEGG_2021_Human',
+                'HuBMAP_ASCTplusB_augmented': 'HuBMAP_ASCTplusB_augmented_2022',
+                'GWAS_Catalog': 'GWAS_Catalog_2023',
+                }
+    
+    else:
+        libs = {"GO_Biological_Process": "", "MGI_Mammalian_Phenotype_Level_4": "", "KEGG": "", "HuBMAP_ASCTplusB_augmented": "", 'GWAS_Catalog': ""}
+        for i in res.json()['statistics']:
+            lib = i['libraryName']
+            if "Mouse" not in lib:
+                for key in libs.keys():
+                    if key in lib:
+                        if libs[key] == '' or lib > libs[key]:
+                            libs[key] = lib
+        print("Using the following libraries:")
+        for k,v in libs.items():
+            print(f'{k}: {v}')
+        return libs
+                        
 
 
-def get_enrichr_results_by_library(enrichr_results, signature_label, plot_type='interactive', library_type='go', version='2018', sort_results_by='pvalue'):
-
+def get_enrichr_results_by_library(enrichr_results, signature_label, plot_type='interactive', library_type='go', version='2025', sort_results_by='pvalue'):
+    libs = get_libraries()
     # Libraries
     if library_type == 'go':
         go_version = str(version)
+        go = libraries['GO_Biological_Process']
+        mgi = libraries['MGI_Mammalian_Phenotype_Level_4']
         libraries = {
-            'GO_Biological_Process_'+go_version: 'Gene Ontology Biological Process ('+go_version+' version)',
-            'MGI_Mammalian_Phenotype_Level_4_2019': 'MGI Mammalian Phenotype Level 4 2019'
+            go: go.replace("_", "_").replace("GO", "Gene Ontology"),
+            mgi: mgi.replace("_", "_"),
         }
     elif library_type == "pathway":
         # Libraries
+        kegg = libraries['KEGG']
         libraries = {
-            'KEGG_2019_Human': 'KEGG Pathways',
+            kegg: 'KEGG Pathways',
         }
     elif library_type == "celltype":
         # Libraries
+        asct = libraries['HuBMAP_ASCTplusB_augmented']
         libraries = {
-            'HuBMAP_ASCT_plus_B_augmented_w_RNAseq_Coexpression': 'HuBMAP ASCT+B Cell Type'
+            asct: 'HuBMAP ASCT+B Cell Type'
         }
     elif library_type=="disease":
+        gwas = libraries['GWAS_Catalog']
         libraries = {
-            'GWAS_Catalog_2019': 'GWAS Catalog',
+            gwas: 'GWAS Catalog',
         }
     # Get Enrichment Results
     enrichment_results = {geneset: get_enrichr_results(enrichr_results[geneset]['userListId'], gene_set_libraries=libraries, geneset=geneset) for geneset in ['upregulated', 'downregulated']}
@@ -962,7 +993,7 @@ def visualize_enrichment_analysis(adata, signatures, meta_class_column_name, dif
         results['go_enrichment'] = {}
         for label, signature in signatures.items():
             # Run analysis
-            results['go_enrichment'][label] = get_enrichr_results_by_library(results['enrichr'][label], label, library_type='go', version='2018')
+            results['go_enrichment'][label] = get_enrichr_results_by_library(results['enrichr'][label], label, library_type='go', version='2025')
             
     if "Pathway" in enrichr_libraries:
         # Initialize results
@@ -1004,7 +1035,7 @@ def visualize_enrichment_analysis(adata, signatures, meta_class_column_name, dif
         results['disease_enrichment'] = {}
         for label, signature in signatures.items():
             # Run analysis
-            results['disease_enrichment'][label] = get_enrichr_results_by_library(results['enrichr'][label], label, library_type='disease', version='2018')
+            results['disease_enrichment'][label] = get_enrichr_results_by_library(results['enrichr'][label], label, library_type='disease', version='2025')
     
     library_option_list = set()
     topk_enriched_terms_dict = defaultdict(list)
