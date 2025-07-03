@@ -861,7 +861,7 @@ def clustering(adata, dataset, umap_n_neighbors, umap_min_dist, bool_plot, figur
         category_list_dict["Cluster"] = list(sorted(adata.obs["leiden"].unique()))
         figure_counter = plot_scatter(umap_df, values_dict, ["Cluster"], adata.obs.index.tolist(), "Scatter plot of the samples. Each dot represents a sample and it is colored by ", category_list_dict=category_list_dict, category=True, dropdown=False, figure_counter=figure_counter)
 
-        display(create_download_link(adata.obs["leiden"], filename=f"clustering_{dataset}.csv"))
+    display(create_download_link(adata.obs["leiden"], filename=f"clustering_{dataset}.csv"))
     return adata, figure_counter
 
 
