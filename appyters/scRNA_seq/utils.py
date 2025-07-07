@@ -539,26 +539,26 @@ def get_enrichr_results_by_library(enrichr_results, signature_label, plot_type='
     # Libraries
     if library_type == 'go':
         go_version = str(version)
-        go = libraries['GO_Biological_Process']
-        mgi = libraries['MGI_Mammalian_Phenotype_Level_4']
+        go = libs['GO_Biological_Process']
+        mgi = libs['MGI_Mammalian_Phenotype_Level_4']
         libraries = {
             go: go.replace("_", "_").replace("GO", "Gene Ontology"),
             mgi: mgi.replace("_", "_"),
         }
     elif library_type == "pathway":
         # Libraries
-        kegg = libraries['KEGG']
+        kegg = libs['KEGG']
         libraries = {
             kegg: 'KEGG Pathways',
         }
     elif library_type == "celltype":
         # Libraries
-        asct = libraries['HuBMAP_ASCTplusB_augmented']
+        asct = libs['HuBMAP_ASCTplusB_augmented']
         libraries = {
             asct: 'HuBMAP ASCT+B Cell Type'
         }
     elif library_type=="disease":
-        gwas = libraries['GWAS_Catalog']
+        gwas = libs['GWAS_Catalog']
         libraries = {
             gwas: 'GWAS Catalog',
         }
