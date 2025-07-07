@@ -26,3 +26,4 @@ scrublet==0.2.3
 seaborn==0.11.2
 stats==0.1.2a
 umap-learn==0.5.2
+cmake==3.19.7
