@@ -18,7 +18,6 @@ import matplotlib
 import matplotlib.pyplot as plt; plt.rcdefaults()
 from matplotlib import rcParams
 from matplotlib.lines import Line2D
-from matplotlib_venn import venn2, venn3
 import IPython
 from IPython.display import HTML, display, Markdown, IFrame, FileLink
 from itertools import combinations, permutations
