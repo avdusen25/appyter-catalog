@@ -1,4 +1,5 @@
 build-essential
+cmake
 gcc
 libcurl4-gnutls-dev
 libfontconfig1-dev

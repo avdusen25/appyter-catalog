@@ -4,7 +4,6 @@ bbknn==1.5.1
 bokeh==2.4.2
 jinja2>=3.0,<3.1
 colorcet==3.0.0
-fa2==0.3.5
 geode @ git+https://github.com/Maayanlab/geode
 kaleido==0.2.1
 leidenalg==0.8.8
@@ -26,4 +25,3 @@ scrublet==0.2.3
 seaborn==0.11.2
 stats==0.1.2a
 umap-learn==0.5.2
-cmake==3.18.2
