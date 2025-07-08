@@ -6,7 +6,6 @@ jinja2>=3.0,<3.1
 colorcet==3.0.0
 geode @ git+https://github.com/Maayanlab/geode
 kaleido==0.2.1
-leidenalg==0.8.8
 maayanlab-bioinformatics @ git+https://github.com/Maayanlab/maayanlab-bioinformatics@v0.5.5
 magic-impute==3.0.0
 matplotlib==3.5.1
