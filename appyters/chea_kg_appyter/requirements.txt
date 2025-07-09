@@ -12,5 +12,6 @@ plotly
 google-genai
 igraph
 leidenalg
-ipycytoscape
 scanpy
+dash
+dash_cytoscape
