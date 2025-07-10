@@ -3,7 +3,7 @@
   "name": "chea_kg_appyter",
   "title": "ChEA-KG_Appyter",
   "version": "0.0.1",
-  "description": "An Appyter that identifies enriched regulatory subnetworks of TFs using the ChEA-KG GRN and characterizes the TFs with the GSFM and Google Gemma.",
+  "description": "An Appyter that identifies enriched regulatory subnetworks of TFs using the ChEA-KG GRN and characterizes the TFs with the GSFM.",
   "image": "cheakg_appyter.png",
   "authors": [
     {
