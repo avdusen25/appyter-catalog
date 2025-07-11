@@ -11,13 +11,21 @@
       "email": "anna.i.byrd28@gmail.com"
     }
   ],
-  "url": "https://github.com/MaayanLab/Harmonizome-Data-Processing-Appyters",
+  "url": "https://github.com/MaayanLab/chea-kg-appyter",
   "tags": [
-    "TODO"
+    "Enrichment Analysis",
+    "Gene Regulatory Network",
+    "Transcription Factors",
+    "ChEA-KG"
   ],
   "license": "CC-BY-NC-SA-4.0",
   "appyter": {
     "file": "chea_kg_appyter.ipynb",
-    "profile": "biojupies"
+    "profile": "biojupies",
+    "extras": [
+      "ipywidgets", 
+      "toggle-code",
+      "hide-code"
+    ]
   }
 }
